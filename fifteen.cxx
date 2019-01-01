@@ -12,7 +12,10 @@
 		sf::Texture t;
 		t.loadFromFile("images/15.png");
 		
+		// размер спрайта
 		int w = 64;
+		
+		// сетка
 		int grid[6][6] = {0};
 		
 		sf::Sprite sprite[20];
@@ -24,9 +27,16 @@
 				n++;
 				sprite[n].setTexture(t);
 				sprite[n].setTextureRect(sf::IntRect(i * w, j * w, w, w));
-				// sprite[n].setTextureRect(sf::IntRect(i * w, j * w, w, w)); 
+				
 				grid[i + 1][j + 1] = n;
 			}
+		}
+		
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 6; j++) {
+				std::cout << grid[i][j] << '\t';
+			}
+			std::cout << std::endl;
 		}
 		
 		while (app.isOpen()) {
@@ -46,10 +56,33 @@
 						int dx = 0;
 						int dy = 0;
 						
-						if (grid[x + 1][y] == 16) { dx = 1; dy = 0; }
-						if (grid[x][y + 1] == 16) { dx = 0; dy = 1; }
-						if (grid[x][y - 1] == 16) { dx = 0; dy = -1; }
-						if (grid[x - 1][y] == 16) { dx = -1; dy = 0; }
+						if (grid[x + 1][y] == 16) { 
+							dx = 1; 
+							dy = 0;
+							std::cout << "x = " << x << ", y = " << y << std::endl; 
+							std::cout << "pos.x = " << pos.x << ", pos.y = " << pos.y << std::endl; 
+						}
+						
+						if (grid[x][y + 1] == 16) { 
+							dx = 0; 
+							dy = 1; 
+							std::cout << "x = " << x << ", y = " << y << std::endl; 
+							std::cout << "pos.x = " << pos.x << ", pos.y = " << pos.y << std::endl; 
+						}
+						
+						if (grid[x][y - 1] == 16) { 
+							dx = 0; 
+							dy = -1; 
+							std::cout << "x = " << x << ", y = " << y << std::endl; 
+							std::cout << "pos.x = " << pos.x << ", pos.y = " << pos.y << std::endl; 
+						}
+						
+						if (grid[x - 1][y] == 16) { 
+							dx = -1; 
+							dy = 0; 
+							std::cout << "x = " << x << ", y = " << y << std::endl; 
+							std::cout << "pos.x = " << pos.x << ", pos.y = " << pos.y << std::endl; 
+						}
 						
 						int n = grid[x][y];
 						grid[x][y] = 16;
